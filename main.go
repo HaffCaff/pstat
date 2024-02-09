@@ -60,11 +60,12 @@ func main() {
 
 	// Format the Strings
 	act := strings.Join(active, ", ")
-	actives := fmt.Sprintf("Active projects: %s", act)
+	actives := fmt.Sprintf("🟢 Active projects: %s", act)
 	stl := strings.Join(stale, ", ")
-	stales := fmt.Sprintf("Stale projects: %s", stl)
+	stales := fmt.Sprintf("🟡 Stale projects: %s", stl)
 
 	//Add colors (courtesy of Fatih's color pkg)
 	color.Green(actives)
+	fmt.Println("")
 	color.Yellow(stales)
 }

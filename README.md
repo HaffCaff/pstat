@@ -9,8 +9,9 @@ The inspiration for this came from opening my dev directory on a teams call to l
 
 ## Future Improvements:
 
-- Allow customization - Allow user to change modTime date threshold
-- Prompt to stale projects to new `stale` directory within current dir
-- Make public and allow for contributions!
-- Publish to homebrew
-- add CI/CD pipeline implementation
+- feat: Allow user to change modTime date threshold
+- feat: Allow user to iterate over directories OR files
+- feat: Prompt to stale projects to new `stale` directory within current dir
+- publish: Make public and allow for contributions!
+- publish: Publish to homebrew
+- ci: add CI/CD pipeline implementation

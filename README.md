@@ -8,3 +8,6 @@ The inspiration for this came from opening my dev directory on a teams call to l
 
 - Allow customization - Allow user to change modTime date threshold
 - Prompt to stale projects to new `stale` directory within current dir
+- Make public and allow for contributions!
+- Publish to homebrew
+- add CI/CD pipeline implementation

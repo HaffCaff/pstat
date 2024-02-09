@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strings"
 	"time"
 
@@ -55,6 +56,8 @@ func main() {
 
 	// Print the results
 	// actives := fmt.Sprintf("Active projects: %s", active)
+	sort.Strings(active)
+	sort.Strings(stale)
 	act := strings.Join(active, ", ")
 	actives := fmt.Sprintf("Active projects: %s", act)
 	stl := strings.Join(stale, ", ")

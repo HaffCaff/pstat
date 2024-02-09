@@ -30,7 +30,7 @@ func main() {
 	defer dir.Close()
 
 	// Read the contents of the root directory
-	entries, err := dir.Readdir(-1)
+	files, err := dir.Readdir(-1)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,29 +39,32 @@ func main() {
 	thresholdDate := time.Now().AddDate(0, 0, -30)
 
 	// Iterate over the directory entries
-	for _, entry := range entries {
-		// Check if the entry is a directory
-		if entry.IsDir() {
+	for _, file := range files {
+		// Check if the entry is a directory (that is not hidden)
+		if file.IsDir() && file.Name()[0] != '.' {
 			// Get the modification time of the directory
-			modTime := entry.ModTime()
+			modTime := file.ModTime()
 
 			// Check if the modification time is before the threshold date
 			if modTime.Before(thresholdDate) {
-				stale = append(stale, entry.Name())
+				stale = append(stale, file.Name())
 			} else {
-				active = append(active, entry.Name())
+				active = append(active, file.Name())
 			}
 		}
 	}
 
-	// Print the results
-	// actives := fmt.Sprintf("Active projects: %s", active)
+	// Sort the slices
 	sort.Strings(active)
 	sort.Strings(stale)
+
+	// Format the Strings
 	act := strings.Join(active, ", ")
 	actives := fmt.Sprintf("Active projects: %s", act)
 	stl := strings.Join(stale, ", ")
 	stales := fmt.Sprintf("Stale projects: %s", stl)
+
+	//Add colors (courtesy of Fatih's color pkg)
 	color.Green(actives)
 	color.Yellow(stales)
 }

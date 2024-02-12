@@ -6,8 +6,15 @@
 
 The inspiration for this came from opening my dev directory on a teams call to look for something that I knew I worked on recently, but there were so many files I got lost...on camera 😭
 
+## Installation
+
+MacOS - Clone repo, run `go build` then run the install.sh script!
+
+use `pstat` to invoke the command!
+
 ## Future Improvements
 
+- feat: swap to Cobra/Viper CLI framework
 - feat: Allow user to change modTime date threshold
 - feat: Allow user to iterate over directories OR files
 - feat: Prompt to stale projects to new `stale` directory within current dir

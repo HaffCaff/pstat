@@ -48,14 +48,14 @@ func main() {
 			// Get the modification time of the directory
 			modTime := file.ModTime()
 
-			// Check if the modification time is before the threshold date
-			if modTime.Before(recentDate) {
-				recent = append(recent, file.Name())
-			} else if modTime.Before(staleDate) {
-				stale = append(stale, file.Name())
-			}else {
-				active = append(active, file.Name())
-			}
+            // Check if the modification time is after the stale date
+            if modTime.After(staleDate) {
+                active = append(active, file.Name())
+            } else if modTime.After(recentDate) {
+                recent = append(recent, file.Name())
+            } else {
+                stale = append(stale, file.Name())
+            }
 		}
 	}
 

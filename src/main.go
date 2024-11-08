@@ -16,6 +16,7 @@ func main() {
 	active := []string{}
 	recent := []string{}
 	stale := []string{}
+	deprecated := []string{}
 
 	// Get the root directory
 	root, err := os.Getwd()
@@ -39,6 +40,7 @@ func main() {
 	// Calculate the threshold date (30 days ago)
 	recentDate := time.Now().AddDate(0, 0, -30)
 	staleDate := time.Now().AddDate(0,0,-60)
+	deprecatedDate := time.Now().AddDate(0,0,-90)
 
 	
 	// Iterate over the directory entries
@@ -50,12 +52,14 @@ func main() {
 
             // Check if the modification time is after the stale date
             if modTime.After(staleDate) {
-                active = append(active, file.Name())
-            } else if modTime.After(recentDate) {
-                recent = append(recent, file.Name())
-            } else {
-                stale = append(stale, file.Name())
-            }
+				active = append(active, file.Name())
+			} else if modTime.After(recentDate) {
+				recent = append(recent, file.Name())
+			} else if modTime.After(deprecatedDate) {
+				stale = append(stale, file.Name())
+			} else {
+				deprecated = append(deprecated, file.Name())
+			}
 		}
 	}
 
@@ -63,6 +67,7 @@ func main() {
 	sort.Strings(active)
 	sort.Strings(recent)
 	sort.Strings(stale)
+	sort.Strings(deprecated)
 
 	// Format the Strings
 	act := strings.Join(active, ", ")
@@ -71,10 +76,14 @@ func main() {
 	recents := fmt.Sprintf("🟡 %v Recent projects: %s", len(recent), rct)
 	stl := strings.Join(stale, ", ")
 	stales := fmt.Sprintf("🔴 %v Stale projects: %s",len(stale), stl)
+	dep := strings.Join(stale, ", ")
+	depres := fmt.Sprintf("⚫ %v Deprecated projects: %s", len(deprecated), dep)
 	//Add colors (courtesy of Fatih's color pkg)
 	color.Green(actives)
 	fmt.Println("")
 	color.Yellow(recents)
 	fmt.Println("")
 	color.Red(stales)
+	fmt.Println("")
+	color.HiBlack(depres)
 }

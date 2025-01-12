@@ -78,12 +78,10 @@ func main() {
 	stales := fmt.Sprintf("🔴 %v Stale projects: %s",len(stale), stl)
 	dep := strings.Join(stale, ", ")
 	depres := fmt.Sprintf("⚫ %v Deprecated projects: %s", len(deprecated), dep)
+	
 	//Add colors (courtesy of Fatih's color pkg)
 	color.Green(actives)
-	fmt.Println("")
 	color.Yellow(recents)
-	fmt.Println("")
 	color.Red(stales)
-	fmt.Println("")
 	color.HiBlack(depres)
 }
